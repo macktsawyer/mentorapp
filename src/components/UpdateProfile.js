@@ -7,6 +7,7 @@ export default function UpdateProfile() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
+    const languages = useRef(new Array([]));
     const { currentUser, updatePassword, updateEmail } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -53,6 +54,13 @@ export default function UpdateProfile() {
                         <Form.Group id="password-confirm">
                             <Form.Label>Password Confirmation</Form.Label>
                             <Form.Control type="password" ref={passwordConfirmRef} placeholder="Keep blank to remain the same" />
+                        </Form.Group>
+                        <Form.Group id="language-group" className="mt-3">
+                            <Form.Label>Programming Languages:</Form.Label>
+                            <Form.Check type="checkbox" ref={languages} label="Javascript" />
+                            <Form.Check type="checkbox" ref={languages} label="Python" />
+                            <Form.Check type="checkbox" ref={languages} label="Ruby" />
+                            <Form.Check type="checkbox" ref={languages} label="Java" />
                         </Form.Group>
                         <Button disabled={loading} className="w-100 mt-2" type="submit">Update Profile</Button>
                     </Form>
