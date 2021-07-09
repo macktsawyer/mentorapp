@@ -18,7 +18,7 @@ export default function UpdateProfile() {
         const promises = [];
         setLoading('true');
         setError('');
-        if (email.current.value !== currentUser.email) {
+        if (emailRef.current.value !== currentUser.email) {
             promises.push(updateEmail(emailRef.current.value))
         }
         if(passwordRef.current.value) {
