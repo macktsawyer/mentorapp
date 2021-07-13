@@ -10,6 +10,7 @@ import Login from './Login';
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import FrontPage from "./FrontPage";
+import FrontPageSignedIn from "./FrontPageSignedIn"
 
 function App() {
   return (
@@ -19,10 +20,9 @@ function App() {
           <Router>
             <AuthProvider>
               <Switch>
-                <ProfileContext>
-                  <PrivateRoute exact path="/" component={Dashboard} />
-                  <PrivateRoute path="/update-profile" component={UpdateProfile} />
-                </ProfileContext>
+                <PrivateRoute exact path="/" component={Dashboard} />
+                <PrivateRoute path="/update-profile" component={UpdateProfile} />
+                <PrivateRoute pass="/frontpage" component={FrontPageSignedIn} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/login" component={Login} />
                 <Route path="/forgot-password" component={ForgotPassword} />
