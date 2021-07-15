@@ -2,12 +2,12 @@ import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
+import LanguageForm from './LanguageForm'
 
-export default function UpdateProfile() {
+export default function UpdateProfile({forwardedRef}) {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const languages = useRef(new Array([]));
     const { currentUser, updatePassword, updateEmail } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -55,15 +55,9 @@ export default function UpdateProfile() {
                             <Form.Label>Password Confirmation</Form.Label>
                             <Form.Control type="password" ref={passwordConfirmRef} placeholder="Keep blank to remain the same" />
                         </Form.Group>
-                        <Form.Group id="language-group" className="mt-3">
-                            <Form.Label>Programming Languages:</Form.Label>
-                            <Form.Check type="checkbox" ref={languages} label="Javascript" />
-                            <Form.Check type="checkbox" ref={languages} label="Python" />
-                            <Form.Check type="checkbox" ref={languages} label="Ruby" />
-                            <Form.Check type="checkbox" ref={languages} label="Java" />
-                        </Form.Group>
                         <Button disabled={loading} className="w-100 mt-2" type="submit">Update Profile</Button>
                     </Form>
+                    <LanguageForm />
                 </Card.Body>
             </Card>
             <div className="w-100 text-center mt-2">
