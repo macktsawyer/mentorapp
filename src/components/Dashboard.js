@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { Card, Button, Alert } from 'react-bootstrap';
-import { useAuth } from '../contexts/AuthContext'
-import { Link, useHistory } from "react-router-dom"
+import { useAuth } from '../contexts/AuthContext';
+import { Link, useHistory } from "react-router-dom";
+import UpdateProfile from './UpdateProfile';
+
 
 
 export default function Dashboard() {
     const [error, setError] = useState('');
+    const [languages, setLanguages] = useState('');
     const { currentUser, logout } = useAuth();
     const history = useHistory();
     
+    function handleLanguages(e) {
+        e.preventDefault();
+        console.log('Checked');
+    }
+
     async function handleLogout() {
         setError('')
 
