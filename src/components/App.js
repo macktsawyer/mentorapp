@@ -10,6 +10,11 @@ import Login from './Login';
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import FrontPage from "./FrontPage";
+import { StoreProvider, createStore } from 'easy-peasy'
+
+const store = createStore({
+  languages: [],
+});
 
 function App() {
   return (
@@ -18,14 +23,16 @@ function App() {
       <div className="w-100" style={{ maxWidth: "400px"}}>
         <Router>
           <AuthProvider>
-            <Switch>
-              <PrivateRoute exact path="/" component={Dashboard} />
-              <PrivateRoute path="/update-profile" component={UpdateProfile} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/login" component={Login} />
-              <Route path="/forgot-password" component={ForgotPassword} />
-              <Route pass="/front-page" component={FrontPage} />
-            </Switch>
+            <StoreProvider store={store}>
+              <Switch>
+                <PrivateRoute exact path="/" component={Dashboard} />
+                <PrivateRoute path="/update-profile" component={UpdateProfile} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/login" component={Login} />
+                <Route path="/forgot-password" component={ForgotPassword} />
+                <Route pass="/front-page" component={FrontPage} />
+              </Switch>
+            </StoreProvider>
           </AuthProvider>
         </Router>
       </div>

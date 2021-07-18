@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
+import { store } from 'easy-peasy';
 
 export default function UpdateProfile({forwardedRef}) {
     const emailRef = useRef();
@@ -10,8 +11,12 @@ export default function UpdateProfile({forwardedRef}) {
     const { currentUser, updatePassword, updateEmail } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [languageOne, setLanguageOne] = useState('false');
     const history = useHistory();
+
+    function handleLanguage(e) {
+        e.preventDefault();
+        store.target.checked;
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -60,7 +65,7 @@ export default function UpdateProfile({forwardedRef}) {
                     <Form>
                         <Form.Group id="language-group" className="mt-3">
                             <Form.Label>Programming Languages:</Form.Label>
-                            <Form.Check name="languageOne" onChange={} value="javascript" type="checkbox" label="Javascript" />
+                            <Form.Check name="languageOne" value="javascript" type="checkbox" label="Javascript" />
                             <Form.Check value="python" type="checkbox" label="Python" />
                             <Form.Check value="ruby" type="checkbox" label="Ruby" />
                             <Form.Check value="java" type="checkbox" label="Java" />
