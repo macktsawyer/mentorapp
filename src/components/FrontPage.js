@@ -22,7 +22,7 @@ export default function FrontPage() {
                         < CardOne />
                     </Col>
                     <Col>
-                        <Card>
+                        <Card style={{ width: "20rem" }}>
                             <Card.Body>
                                 Welcome lets get start this is just filler text for now but I am like super glad you are here like heck yeah lets
                                 do this buddy
