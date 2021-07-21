@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card, Nav, Navbar, Container, Row, Col } from 'react-bootstrap';
+import CardOne from './CardOne';
 
 export default function FrontPage() {
     return (
@@ -15,16 +16,10 @@ export default function FrontPage() {
                     <Button href="/" variant="outline-info" size="sm" className="ms-2 me-3" to="/">Dashboard</Button>
                 </Nav.Item>
             </Navbar>
-            <Container>
+            <Container fluid>
                 <Row>
                     <Col>
-                        <Card>
-                            <Card.Body>
-                                Welcome lets get start this is just filler text for now but I am like super glad you are here like heck yeah lets
-                                do this buddy
-                                <Button href="/Signup" className="w-100 text-center mt-2">Get Started</Button>
-                            </Card.Body>
-                        </Card>
+                        < CardOne />
                     </Col>
                     <Col>
                         <Card>
