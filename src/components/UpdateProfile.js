@@ -2,9 +2,11 @@ import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
-import { store } from 'easy-peasy';
+import { Formik, Field } from 'formik';
+import { db } from '../firebase';
 
-export default function UpdateProfile({forwardedRef}) {
+
+export default function UpdateProfile() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
@@ -12,13 +14,9 @@ export default function UpdateProfile({forwardedRef}) {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-    function handleLanguage(e) {
-        e.preventDefault();
-        store.target.checked;
-    }
-
-    function handleSubmit(e) {
+    function handleUpdate(e) {
         e.preventDefault();
 
         const promises = [];
@@ -47,7 +45,7 @@ export default function UpdateProfile({forwardedRef}) {
                 <Card.Body>
                     <h2 className="text-center mb-4">Update Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleUpdate}>
                         <Form.Group id="email">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" ref={emailRef} required defaultValue={currentUser.email} />
@@ -62,16 +60,29 @@ export default function UpdateProfile({forwardedRef}) {
                         </Form.Group>
                         <Button disabled={loading} className="w-100 mt-2" type="submit">Update Profile</Button>
                     </Form>
-                    <Form>
-                        <Form.Group id="language-group" className="mt-3">
-                            <Form.Label>Programming Languages:</Form.Label>
-                            <Form.Check name="languageOne" value="javascript" type="checkbox" label="Javascript" />
-                            <Form.Check value="python" type="checkbox" label="Python" />
-                            <Form.Check value="ruby" type="checkbox" label="Ruby" />
-                            <Form.Check value="java" type="checkbox" label="Java" />
+                    <Formik initialValues={{ languages: [] }} onSubmit={async (values) => {
+                        await sleep(500);
+                        db.collection('languages').add(values);
+                        console.log(values)
+                    }}>
+                        {({ values, handleSubmit }) => (
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group>
+                                <Form.Label className="me-1">Javascript-</Form.Label>
+                                <Field className="me-1" type="checkbox" name="languages" value="Javascript"></Field>
+                                <Form.Label className="me-1">Python-</Form.Label>
+                                <Field className="me-1" type="checkbox" name="languages" value="Python"></Field>
+                                <Form.Label className="me-1">Ruby-</Form.Label>
+                                <Field className="me-1" type="checkbox" name="languages" value="Ruby"></Field>
+                                <Form.Label className="me-1">Java-</Form.Label>
+                                <Field className="me-1" type="checkbox" name="languages" value="Java"></Field>
+                            </Form.Group>
+                            <div>{values.picked}</div>
                             <Button type="submit">Submit</Button>
-                        </Form.Group>
-                    </Form>
+                            <pre>{JSON.stringify(values, null, 2)}</pre>
+                        </Form>
+                        )}
+                    </Formik>
                 </Card.Body>
             </Card>
             <div className="w-100 text-center mt-2">
