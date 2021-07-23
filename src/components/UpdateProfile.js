@@ -62,7 +62,7 @@ export default function UpdateProfile() {
                     </Form>
                     <Formik initialValues={{ languages: [] }} onSubmit={async (values) => {
                         await sleep(500);
-                        db.collection('languages').add(values);
+                        db.collection('languages').doc(`${currentUser.uid}.languages`).set(values);
                         console.log(values)
                     }}>
                         {({ values, handleSubmit }) => (
@@ -77,7 +77,6 @@ export default function UpdateProfile() {
                                 <Form.Label className="me-1">Java-</Form.Label>
                                 <Field className="me-1" type="checkbox" name="languages" value="Java"></Field>
                             </Form.Group>
-                            <div>{values.picked}</div>
                             <Button type="submit">Submit</Button>
                             <pre>{JSON.stringify(values, null, 2)}</pre>
                             <pre>{JSON.stringify(currentUser.uid, null, 2)}</pre>
