@@ -41,7 +41,7 @@ export default function UpdateProfile() {
 
     return (
         <div>
-            <Card>
+            <Card className="d-flex justify-content-center">
                 <Card.Body>
                     <h2 className="text-center mb-4">Update Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -58,11 +58,16 @@ export default function UpdateProfile() {
                             <Form.Label>Password Confirmation</Form.Label>
                             <Form.Control type="password" ref={passwordConfirmRef} placeholder="Keep blank to remain the same" />
                         </Form.Group>
-                        <Button disabled={loading} className="w-100 mt-2" type="submit">Update Profile</Button>
+                        <div className="text-center">
+                            <Button disabled={loading} className="w-50 mt-2" type="submit">Update Profile</Button>
+                        </div>
                     </Form>
                     <Formik initialValues={{ languages: [] }} onSubmit={async (values) => {
                         await sleep(500);
-                        db.collection('languages').doc(`${currentUser.uid}.languages`).set(values);
+                        db.collection('languages').doc(`${currentUser.uid}.languages`).set({
+                            languages: [values],
+                            uid: `${currentUser.uid}`
+                        });
                         console.log(values)
                     }}>
                         {({ values, handleSubmit }) => (
