@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button, Alert, Navbar, Nav, Container } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from "react-router-dom";
@@ -9,6 +9,29 @@ export default function Dashboard() {
     const [error, setError] = useState('');
     const { currentUser, logout } = useAuth();
     const history = useHistory();
+    const [userInfo, setUserInfo] = useState([]);
+    const userLanguages = userInfo[0];
+    // let userInfo = db.collection('languages').doc(`${currentUser.uid}.languages`);
+
+    useEffect(() => {
+        const fetchInfo = async () => {
+            try {
+                const ref = db.collection('languages');
+                const docs = await ref.get();
+                let langInfo = [];
+                docs.forEach((doc) => {
+                    const data = doc.data();
+                    langInfo.push(data.languages);
+                });
+                setUserInfo(langInfo);
+            } catch (error) {
+                console.log("error",error);
+            }
+        };
+        fetchInfo();
+    })
+
+    console.log(userLanguages.0.languages)
 
     // Function to handle logout
     async function handleLogout() {
@@ -37,12 +60,9 @@ export default function Dashboard() {
                         <strong>Email:</strong> {currentUser.email}
                         <h5 className="mt-3">Languages I'm looking to learn:</h5>
                         <div className="text-center mt-3">
-                            {/* {db.collection('languages').doc(`${currentUser.uid}.languages`).get().then((doc) => {
-                                if (doc.exists) {
-                                    return (<div>{doc.data}</div>)
-                                } 
-                            })
-                            } */}
+                            {userInfo.map((data) => {
+                                return (<div>{data.languages}</div>)
+                            })}
                         </div>
                         <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
                     </Card.Body>
