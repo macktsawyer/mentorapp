@@ -7,31 +7,35 @@ import { db } from '../firebase';
 
 export default function Dashboard() {
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
     const { currentUser, logout } = useAuth();
     const history = useHistory();
     const [userInfo, setUserInfo] = useState([]);
-    const userLanguages = userInfo[0];
-    // let userInfo = db.collection('languages').doc(`${currentUser.uid}.languages`);
+    const userID = currentUser.uid;
+    // userinfo[0].values.languages
 
     useEffect(() => {
         const fetchInfo = async () => {
             try {
-                const ref = db.collection('languages');
+                setLoading(true);
+                const ref = db.collection('languages').doc(`${userID}.languages`);
                 const docs = await ref.get();
                 let langInfo = [];
-                docs.forEach((doc) => {
-                    const data = doc.data();
-                    langInfo.push(data.languages);
+                [docs].forEach((doc) => {
+                    const langData = doc.data();
+                    langInfo.push(langData);
                 });
                 setUserInfo(langInfo);
             } catch (error) {
-                console.log("error",error);
+                console.log("error: ", error);
+            } finally {
+                setLoading(false);
             }
         };
         fetchInfo();
-    })
+    }, [userID])
 
-    console.log(userLanguages.0.languages)
+    console.log(userInfo)
 
     // Function to handle logout
     async function handleLogout() {
@@ -60,9 +64,7 @@ export default function Dashboard() {
                         <strong>Email:</strong> {currentUser.email}
                         <h5 className="mt-3">Languages I'm looking to learn:</h5>
                         <div className="text-center mt-3">
-                            {userInfo.map((data) => {
-                                return (<div>{data.languages}</div>)
-                            })}
+                            {!loading && <div>{userInfo[0].values.languages}</div>}
                         </div>
                         <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
                     </Card.Body>
