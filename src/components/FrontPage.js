@@ -17,6 +17,13 @@ export default function FrontPage() {
                     <Button href="/" variant="outline-info" size="sm" className="ms-2 me-3" to="/">Dashboard</Button>
                 </Nav.Item>
             </Navbar>
+            <Container>
+                <Card>
+                    <Card.Body>
+                        
+                    </Card.Body>
+                </Card>
+            </Container>
             <Container id="cardContainer">
                 <Row>
                     <Col>
