@@ -10,7 +10,9 @@ export default function UpdateProfile() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const { currentUser, updatePassword, updateEmail } = useAuth();
+    const screenRef = useRef();
+    const picRef = useRef();
+    const { currentUser, updatePassword, updateEmail, updateProfile, updatePicture } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -25,17 +27,26 @@ export default function UpdateProfile() {
         if (emailRef.current.value !== currentUser.email) {
             promises.push(updateEmail(emailRef.current.value))
         }
+        if (screenRef.current.value !== currentUser.displayName) {
+            promises.push(updateProfile(screenRef.current.value))
+        }
+        if (picRef.current.value !== currentUser.photoURL) {
+            promises.push(updatePicture(picRef.current.value))
+        }
         if(passwordRef.current.value) {
             promises.push(updatePassword(passwordRef.current.value))
         }
+        
         Promise.all(promises).then(() => {
             history.push('/')
         }).catch(() => {
         setError('Failed to update account')}).finally(() =>
         setLoading('false'))
-
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError('Passwords do not match');
+        }
+        if (screenRef.current.value === currentUser.displayName) {
+            return setError('Choose a new display name')
         }
     }
 
@@ -45,46 +56,64 @@ export default function UpdateProfile() {
                 <Card.Body>
                     <h2 className="text-center mb-4">Update Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <Form onSubmit={handleUpdate}>
-                        <Form.Group id="email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" ref={emailRef} required defaultValue={currentUser.email} />
-                        </Form.Group>
-                        <Form.Group id="password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" ref={passwordRef} placeholder="Keep blank to remain the same" />
-                        </Form.Group>
-                        <Form.Group id="password-confirm">
-                            <Form.Label>Password Confirmation</Form.Label>
-                            <Form.Control type="password" ref={passwordConfirmRef} placeholder="Keep blank to remain the same" />
-                        </Form.Group>
-                        <div className="text-center">
-                            <Button disabled={loading} className="w-50 mt-2" type="submit">Update Profile</Button>
-                        </div>
-                    </Form>
+                    <div className="d-flex justify-content-center">
+                        <Form className="w-50 text-center" onSubmit={handleUpdate}>
+                            <Form.Group id="email">
+                                <Form.Label><strong>Email</strong></Form.Label>
+                                <Form.Control type="email" ref={emailRef} required defaultValue={currentUser.email} />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label><strong>Display Name</strong></Form.Label>
+                                <Form.Control type="text" ref={screenRef} defaultValue={currentUser.displayName} placeholder="Display Name"></Form.Control>
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label><strong>Display Picture URL</strong></Form.Label>
+                                <Form.Control type="text" ref={picRef} defaultValue={currentUser.photoURL} placeholder="Display Picture URL"></Form.Control>
+                            </Form.Group>
+                            <Form.Group id="password">
+                                <Form.Label><strong>Password</strong></Form.Label>
+                                <Form.Control type="password" ref={passwordRef} placeholder="Keep blank to remain the same" />
+                            </Form.Group>
+                            <Form.Group id="password-confirm">
+                                <Form.Label><strong>Password Confirmation</strong></Form.Label>
+                                <Form.Control type="password" ref={passwordConfirmRef} placeholder="Keep blank to remain the same" />
+                            </Form.Group>
+                            <div className="text-center">
+                                <Button disabled={loading} className="w-40 mt-2" type="submit">Update Profile</Button>
+                            </div>
+                        </Form>
+                    </div>
                     <Formik initialValues={{ languages: [] }} onSubmit={async (values) => {
                         await sleep(500);
                         db.collection('languages').doc(`${currentUser.uid}.languages`).set({
                             values,
                             uid: `${currentUser.uid}`
-                        });
+                        }).then(() => {
+                            history.push('/')
+                        })
                         console.log(values)
                     }}>
                         {({ values, handleSubmit }) => (
-                        <Form onSubmit={handleSubmit}>
+                        <Form className="text-center mt-4" onSubmit={handleSubmit}>
                             <Form.Group>
+                                <h4 className="mb-4">What languages do you want to learn?</h4>
                                 <Form.Label className="me-1">Javascript-</Form.Label>
                                 <Field className="me-1" type="checkbox" name="languages" value="Javascript"></Field>
+                                <br />
                                 <Form.Label className="me-1">Python-</Form.Label>
                                 <Field className="me-1" type="checkbox" name="languages" value="Python"></Field>
+                                <br />
                                 <Form.Label className="me-1">Ruby-</Form.Label>
                                 <Field className="me-1" type="checkbox" name="languages" value="Ruby"></Field>
+                                <br />
                                 <Form.Label className="me-1">Java-</Form.Label>
                                 <Field className="me-1" type="checkbox" name="languages" value="Java"></Field>
+                                <br />
                             </Form.Group>
-                            <Button type="submit">Submit</Button>
-                            <pre>{JSON.stringify(values, null, 2)}</pre>
-                            <pre>{JSON.stringify(currentUser.uid, null, 2)}</pre>
+                            <div className="text-center mt-2">
+                                <Button type="submit">Submit Languages</Button>
+                            </div>
+                            {<pre>{JSON.stringify(values, null, 2)}</pre>}
                         </Form>
                         )}
                     </Formik>

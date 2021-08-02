@@ -59,12 +59,21 @@ export default function Dashboard() {
             <Container className="d-flex justify-content-center">
                 <Card>
                     <Card.Body>
-                        <h2 className="text-center mb-4">Profile</h2>
+                        <h2 className="text-center mb-4">{currentUser.displayName}'s Profile</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
-                        <strong>Email:</strong> {currentUser.email}
+                        <div className="d-flex justify-content-center">
+                            <img alt="display" className="justify-content-center mb-2" style={{height: "50px"}} src={currentUser.photoURL}></img>
+                        </div>
+                        <br />
+                        <strong className="mt-2">Email:</strong> {currentUser.email}
+                        <br />
+                        <strong>Display Name: </strong> {currentUser.displayName}
                         <h5 className="mt-3">Languages I'm looking to learn:</h5>
                         <div className="text-center mt-3">
-                            {!loading && <div>{userInfo[0].values.languages}</div>}
+                            {!loading && <div>
+                                {userInfo[0].values.languages.map((lang) => 
+                                <li>{lang}</li>)}
+                                </div>}
                         </div>
                         <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
                     </Card.Body>

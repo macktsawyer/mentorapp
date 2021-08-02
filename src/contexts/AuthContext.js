@@ -31,6 +31,18 @@ export function AuthProvider({ children }) {
         return currentUser.updateEmail(email);
     }
 
+    function updateProfile(screenName) {
+        return currentUser.updateProfile({
+            displayName: screenName,
+        })
+    }
+
+    function updatePicture(picURL) {
+        return currentUser.updateProfile({
+            photoURL: picURL
+        })
+    }
+
     function logout() {
         return auth.signOut();
     }
@@ -51,7 +63,9 @@ export function AuthProvider({ children }) {
         logout,
         resetPassword,
         updateEmail,
-        updatePassword
+        updatePassword,
+        updateProfile,
+        updatePicture
     }
 
     return (
