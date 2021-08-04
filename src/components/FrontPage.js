@@ -20,11 +20,7 @@ export default function FrontPage() {
             <Container>
                 <Card className="mb-4">
                     <Card.Body className="mb-1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque viverra in magna a auctor. Sed eu risus tincidunt, mattis ipsum eu, ultrices lacus. Duis ullamcorper metus arcu. Nullam vel lacus nec eros egestas sollicitudin. Etiam eget dui sit amet nisi varius aliquam non in lorem. Vivamus rhoncus quis ante vitae fringilla. Proin odio enim, euismod sit amet viverra ac, laoreet ac felis.
-
-                        Quisque tempor augue ut lacus malesuada aliquam ac nec leo. Suspendisse consectetur libero elit, quis lacinia urna congue vitae. Donec eu viverra enim, vitae tincidunt libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc euismod odio nec mauris varius rhoncus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse mattis, erat ut malesuada convallis, enim mi suscipit nisi, ac congue lacus nisi id justo. Aenean purus velit, scelerisque nec dui vitae, auctor volutpat augue. Vivamus laoreet neque id nisl tincidunt mollis.
-
-                        Nulla varius fermentum malesuada. Mauris non hendrerit lacus. Morbi condimentum est nec ex viverra elementum. Praesent eget justo turpis. Nunc et felis facilisis, sodales velit id, volutpat sem. Fusce bibendum iaculis ornare. Nam ac libero ultrices, consequat ex nec, lacinia felis. Nunc fringilla enim a rhoncus convallis.
+                        Learning to program is difficult. Often we may seek help only to be told to find it on Google. While we need to develop the skills to solve our own issues as junior developers, some answers cannot be found on StackOverflow alone. 
                     </Card.Body>
                 </Card>
             </Container>
