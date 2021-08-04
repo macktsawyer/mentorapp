@@ -30,7 +30,7 @@ export default function Signup() {
             console.log('Document created!')
             ).catch((error) => 
             console.error("Error :", error))
-            history.push('/');
+            history.push('/update-profile');
         } catch {
             setError('Failed to create an account')
         }

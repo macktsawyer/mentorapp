@@ -12,7 +12,6 @@ export default function Dashboard() {
     const history = useHistory();
     const [userInfo, setUserInfo] = useState([]);
     const userID = currentUser.uid;
-    // userinfo[0].values.languages
 
     useEffect(() => {
         const fetchInfo = async () => {
@@ -34,8 +33,6 @@ export default function Dashboard() {
         };
         fetchInfo();
     }, [userID])
-
-    console.log(userInfo)
 
     // Function to handle logout
     async function handleLogout() {
@@ -70,10 +67,9 @@ export default function Dashboard() {
                         <strong>Display Name: </strong> {currentUser.displayName}
                         <h5 className="mt-3">Languages I'm looking to learn:</h5>
                         <div className="text-center mt-3">
-                            {!loading && <div>
-                                {userInfo[0].values.languages.map((lang) => 
-                                <li>{lang}</li>)}
-                                </div>}
+                            <div>
+                                {!loading && userInfo[0].values.languages}
+                            </div>
                         </div>
                         <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
                     </Card.Body>
