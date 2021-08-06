@@ -22,8 +22,8 @@ export default function Signup() {
             setError('')
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value);
-            await db.collection('languages').doc(`${currentUser.uid}.languages`).set({
-                languages: '',
+            await db.collection('languages').add({
+                languages: [],
                 uid: `${currentUser.uid}`, //Working on establishing initial values
                 position: ''
             }) 

@@ -17,14 +17,19 @@ export default function Dashboard() {
         const fetchInfo = async () => {
             try {
                 setLoading(true);
-                const ref = db.collection('languages').doc(`${userID}.languages`);
-                const docs = await ref.get();
-                let langInfo = [];
-                [docs].forEach((doc) => {
-                    const langData = doc.data();
-                    langInfo.push(langData);
-                });
-                setUserInfo(langInfo);
+                // const ref = db.collection('languages').doc;
+                // const docs = await ref.get();
+                // let langInfo = [];
+                // [docs].forEach((doc) => {
+                //     const langData = doc.data();
+                //     langInfo.push(langData);
+                // });
+                await db.collection('language').get().then((querySnapshot) =>
+                querySnapshot.forEach((doc) => {
+                    console.log(`${doc.id} => ${doc.data()}`);
+                    setUserInfo(doc.data());
+                    console.log(userInfo);
+                }))
             } catch (error) {
                 console.log("error: ", error);
             } finally {
@@ -32,7 +37,7 @@ export default function Dashboard() {
             }
         };
         fetchInfo();
-    }, [userID])
+    }, [userID, userInfo])
 
     // Function to handle logout
     async function handleLogout() {
@@ -68,7 +73,7 @@ export default function Dashboard() {
                         <h5 className="mt-3">Languages I'm looking to learn:</h5>
                         <div className="text-center mt-3">
                             <div>
-                                {!loading && userInfo[0].values.languages}
+                                {!loading && userInfo}
                             </div>
                         </div>
                         <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
