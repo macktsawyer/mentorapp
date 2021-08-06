@@ -21,17 +21,16 @@ export default function Signup() {
         try {
             setError('')
             setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value) 
+            await signup(emailRef.current.value, passwordRef.current.value);
             await db.collection('languages').doc(`${currentUser.uid}.languages`).set({
                 languages: '',
                 uid: `${currentUser.uid}`, //Working on establishing initial values
                 position: ''
-            }).then(() => 
+            }) 
             console.log('Document created!')
-            ).catch((error) => 
-            console.error("Error :", error))
-            history.push('/update-profile');
+            history.push('/front-page')
         } catch {
+            console.log(error)
             setError('Failed to create an account')
         }
         setLoading(false)
