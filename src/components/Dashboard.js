@@ -17,19 +17,13 @@ export default function Dashboard() {
         const fetchInfo = async () => {
             try {
                 setLoading(true);
-                // const ref = db.collection('languages').doc;
-                // const docs = await ref.get();
-                // let langInfo = [];
-                // [docs].forEach((doc) => {
-                //     const langData = doc.data();
-                //     langInfo.push(langData);
-                // });
-                await db.collection('language').get().then((querySnapshot) =>
-                querySnapshot.forEach((doc) => {
-                    console.log(`${doc.id} => ${doc.data()}`);
-                    setUserInfo(doc.data());
-                    console.log(userInfo);
-                }))
+                const ref = db.collection('languages').doc;
+                const docs = await ref.get();
+                let langInfo = [];
+                [docs].forEach((doc) => {
+                    const langData = doc.data();
+                    langInfo.push(langData);
+                });
             } catch (error) {
                 console.log("error: ", error);
             } finally {

@@ -85,8 +85,8 @@ export default function UpdateProfile() {
                     </div>
                     <Formik initialValues={{ languages: [] }} onSubmit={async (values) => {
                         await sleep(500);
-                        db.collection('languages').doc('languages').set({
-                            languages: values,
+                        db.collection('languages').add({
+                            values,
                             uid: `${currentUser.uid}`
                         }).then(() => {
                             history.push('/')

@@ -18,9 +18,9 @@ export default function FrontPage() {
                 </Nav.Item>
             </Navbar>
             <Container>
-                <Card className="mb-4">
+                <Card className="text-center mb-4">
                     <Card.Body className="mb-1">
-                        Learning to program is difficult. Often we may seek help only to be told to find it on Google. While we need to develop the skills to solve our own issues as junior developers, some answers cannot be found on StackOverflow alone. 
+                        Learning to program is difficult. You don't have to do it alone. Often we may seek help only to be told to find our answers on Google. While it is true that we need to develop the skills to problem solve, some answers cannot be found on StackOverflow alone. Sometimes we need a guiding and helping hand.
                     </Card.Body>
                 </Card>
             </Container>
