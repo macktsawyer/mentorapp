@@ -22,7 +22,7 @@ export default function Signup() {
             setError('')
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value);
-            await db.collection('languages').add({
+            await db.collection('languages').add({ // Name document after UID again
                 languages: [],
                 uid: `${currentUser.uid}`, //Working on establishing initial values
                 position: ''

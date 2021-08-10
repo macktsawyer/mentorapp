@@ -17,13 +17,14 @@ export default function Dashboard() {
         const fetchInfo = async () => {
             try {
                 setLoading(true);
-                const ref = db.collection('languages').doc;
+                const ref = db.collection('languages');
                 const docs = await ref.get();
                 let langInfo = [];
                 [docs].forEach((doc) => {
-                    const langData = doc.data();
+                    let langData = doc.data();
                     langInfo.push(langData);
                 });
+                console.log(langInfo)
             } catch (error) {
                 console.log("error: ", error);
             } finally {
