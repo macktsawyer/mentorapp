@@ -32,9 +32,8 @@ export default function FrontPage() {
                     <Col>
                         <Card>
                             <Card.Img variant="top" src="https://images.pexels.com/photos/2173508/pexels-photo-2173508.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></Card.Img>
-                            <Card.Body>
-                                Welcome lets get start this is just filler text for now but I am like super glad you are here like heck yeah lets
-                                do this buddy
+                            <Card.Body className="text-center">
+                            Students not only have the opportunity to broaden their knowledge but the student will objectively be able to quantify some of their learning experience through their lessons and student rating. 
                                 <Button href="/Signup" className="w-100 text-center mt-2">Get Started</Button>
                             </Card.Body>
                         </Card>
