@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
+import { auth } from '../firebase'
 import { Link, useHistory } from 'react-router-dom';
 import { db } from '../firebase';
 
@@ -8,7 +9,7 @@ export default function Signup() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const { signup, currentUser } = useAuth();
+    const { signup } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -22,13 +23,20 @@ export default function Signup() {
             setError('')
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value);
-            await db.collection('languages').add({ // Name document after UID again
-                languages: [],
-                uid: `${currentUser.uid}`, //Working on establishing initial values
-                position: ''
-            }) 
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    let uid = user.uid;
+                    db.collection('languages').doc(`${uid}`).set({ // Name document after UID again...or username/email?
+                        languages: ["unset"],
+                        uid: `${uid}`, //Working on establishing initial values
+                        position: ''
+                    }) 
+                } else {
+                    console.log("Error with signup")
+                }
+            })
             console.log('Document created!')
-            history.push('/front-page')
+            history.push('/')
         } catch {
             console.log(error)
             setError('Failed to create an account')

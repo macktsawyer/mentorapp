@@ -3,15 +3,12 @@ import { Button, Card, Nav, Navbar, Container, Row, Col } from 'react-bootstrap'
 import CardOne from './CardOne';
 import './FrontPage.scss';
 
-export default function FrontPage() {
+export default function FrontPageLogged() {
     return (
         <div>
             <Navbar fixed="top" variant="pills" className="justify-content-end">
                 <Nav.Item>
-                    <Button href="/Login" variant="outline-info" size="sm" className="ms-2 me-2" to="/Login">Login</Button>
-                </Nav.Item>
-                <Nav.Item>
-                    <Button href="/Signup" variant="outline-info" size="sm" className="ms-1 me-4" to="/Signup">Sign Up</Button>
+                    <Button href="/" variant="outline-info" size="sm" className="ms-2 me-3" to="/">Dashboard</Button>
                 </Nav.Item>
             </Navbar>
             <Container>

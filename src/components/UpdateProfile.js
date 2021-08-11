@@ -16,6 +16,8 @@ export default function UpdateProfile() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+    const userID = currentUser.uid;
+    const document = db.collection('languages').doc(userID);
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
     function handleUpdate(e) {
@@ -85,8 +87,8 @@ export default function UpdateProfile() {
                     </div>
                     <Formik initialValues={{ languages: [] }} onSubmit={async (values) => {
                         await sleep(500);
-                        db.collection('languages').add({
-                            values,
+                        document.set({
+                            languages: values,
                             uid: `${currentUser.uid}`
                         }).then(() => {
                             history.push('/')

@@ -12,26 +12,27 @@ export default function Dashboard() {
     const history = useHistory();
     const [userInfo, setUserInfo] = useState([]);
     const userID = currentUser.uid;
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
     useEffect(() => {
         const fetchInfo = async () => {
             try {
                 setLoading(true);
-                const ref = db.collection('languages');
+                await sleep(500);
+                const ref = db.collection('languages').doc(`${userID}`);
                 const docs = await ref.get();
                 let langInfo = [];
                 [docs].forEach((doc) => {
                     let langData = doc.data();
-                    langInfo.push(langData);
+                    langInfo.push(langData.languages.languages);
                 });
-                console.log(langInfo)
+                setUserInfo(langInfo[0]);
             } catch (error) {
                 console.log("error: ", error);
-            } finally {
-                setLoading(false);
             }
         };
         fetchInfo();
+        setLoading(false);
     }, [userID, userInfo])
 
     // Function to handle logout
@@ -68,7 +69,9 @@ export default function Dashboard() {
                         <h5 className="mt-3">Languages I'm looking to learn:</h5>
                         <div className="text-center mt-3">
                             <div>
-                                {!loading && userInfo}
+                                { loading ? "Loading..." : userInfo.map((i) => {
+                                    return <li key={`${i}`} style ={{listStyle:'none'}}>{i}</li>
+                                }) }
                             </div>
                         </div>
                         <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
