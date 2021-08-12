@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import FrontPage from "./FrontPage";
 import FrontPageLogged from "./FrontLoggedIn"
+import Results from "./Results"
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <PrivateRoute path="/front-page-logged" component={FrontPageLogged} />              
               <Route path="/signup" component={Signup} />
+              <Route path="/results" component={Results} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/front-page" component={FrontPage} />

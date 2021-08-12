@@ -1,18 +1,34 @@
 import React from 'react';
-import { Button, Card, Nav, Navbar, Container, Row, Col } from 'react-bootstrap';
+import { Button, Card, Nav, Navbar, Container, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 import CardOne from './CardOne';
 import './FrontPage.scss';
 
 export default function FrontPage() {
     return (
         <div>
-            <Navbar fixed="top" variant="pills" className="justify-content-end">
-                <Nav.Item>
-                    <Button href="/Login" variant="outline-info" size="sm" className="ms-2 me-2" to="/Login">Login</Button>
-                </Nav.Item>
-                <Nav.Item>
-                    <Button href="/Signup" variant="outline-info" size="sm" className="ms-1 me-4" to="/Signup">Sign Up</Button>
-                </Nav.Item>
+            <Navbar fixed="top" variant="pills" className="w-100 align-items-center">
+                <Container>
+                    <Navbar.Brand className="mb-2" href="">MentorShip</Navbar.Brand>
+                </Container>
+                <Container fixed="top" className="d-flex justify-content-center">
+                    <InputGroup className="mb-3 mt-2">
+                        <Button variant="outline-info" id="button-addon1">
+                        Search
+                        </Button>
+                        <FormControl
+                        aria-label="Example text with button addon"
+                        aria-describedby="basic-addon1"
+                        />
+                    </InputGroup>
+                </Container>
+                <Container className="justify-content-end">
+                    <Nav.Item>
+                        <Button href="/Login" variant="outline-info" size="sm" className="ms-2 me-2 mb-2" to="/Login">Login</Button>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Button href="/Signup" variant="outline-info" size="sm" className="ms-1 me-4 mb-2" to="/Signup">Sign Up</Button>
+                    </Nav.Item>
+                </Container>
             </Navbar>
             <Container>
                 <Card className="text-center mb-4">
