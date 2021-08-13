@@ -51,7 +51,7 @@ export default function Dashboard() {
         <>
             <Navbar fixed="top" variant="pills" className="me-2 justify-content-end">
                 <Nav.Item>
-                    <Button href="/front-page" variant="outline-info" to="/front-page">Home</Button>
+                    <Button href="/front-page-logged" variant="outline-info" to="/front-page">Home</Button>
                 </Nav.Item>
             </Navbar>
             <Container className="d-flex justify-content-center">
