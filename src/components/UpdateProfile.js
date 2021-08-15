@@ -17,7 +17,7 @@ export default function UpdateProfile() {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     const userID = currentUser.uid;
-    const document = db.collection('languages').doc(userID);
+    const document = db.collection('userinfo').doc(userID);
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
     function handleUpdate(e) {
@@ -94,11 +94,13 @@ export default function UpdateProfile() {
                     <Container className="w-50">
                         <Card>
                             <Card.Body>
-                                <Formik initialValues={{ languages: [] }} onSubmit={async (values) => {
+                                <Formik initialValues={{ languages: [], description: '', position: '' }} onSubmit={async (values) => {
                                     await sleep(500);
                                     document.set({
-                                        languages: values,
-                                        uid: `${currentUser.uid}`
+                                        languages: values.languages,
+                                        uid: `${currentUser.uid}`,
+                                        position: values.position,
+                                        description: values.description
                                     }).then(() => {
                                         history.push('/')
                                     })
@@ -138,6 +140,29 @@ export default function UpdateProfile() {
                                                         <Field className="me-1" type="checkbox" name="languages" value="PHP"></Field>
                                                         <br />
                                                     </Col>
+                                                </Row>
+                                                <br />
+                                                <h4 className="mb-4">Are you a student, mentor or both?</h4>
+                                                <Row>
+                                                    <Col>
+                                                    <Form.Label className="me-1">Student -</Form.Label>
+                                                    <Field className="me-1" type="checkbox" name="position" value="student"></Field>
+                                                    </Col>
+                                                    <Col>
+                                                    <Form.Label className="me-1">Mentor</Form.Label>
+                                                    <Field className="me-1" type="checkbox" name="position" value="mentor"></Field>
+                                                    </Col>
+                                                    <Col>
+                                                    <Form.Label className="me-1">Both</Form.Label>
+                                                    <Field className="me-1" type="checkbox" name="position" value="both"></Field>
+                                                    </Col>
+                                                </Row>
+                                                <br />
+                                                <Row>
+                                                <h4 className="mb-4">Tell us a bit about yourself!</h4>
+                                                    <Field as="textarea" id="description" maxLength="300" name="description" type="textarea" placeholder="Describe Yourself">
+
+                                                    </Field>
                                                 </Row>
                                             </Container>
                                         </Form.Group>

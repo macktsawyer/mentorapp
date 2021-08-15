@@ -11,6 +11,7 @@ export default function Dashboard() {
     const { currentUser, logout } = useAuth();
     const history = useHistory();
     const [userInfo, setUserInfo] = useState([]);
+    const [userDesc, setUserDesc] = useState('');
     const userID = currentUser.uid;
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -19,12 +20,13 @@ export default function Dashboard() {
             try {
                 setLoading(true);
                 await sleep(500);
-                const ref = db.collection('languages').doc(`${userID}`);
+                const ref = db.collection('userinfo').doc(`${userID}`);
                 const docs = await ref.get();
                 let langInfo = [];
                 [docs].forEach((doc) => {
                     let langData = doc.data();
-                    langInfo.push(langData.languages.languages);
+                    langInfo.push(langData.languages);
+                    setUserDesc(langData.description);
                 });
                 setUserInfo(langInfo[0]);
             } catch (error) {
@@ -66,15 +68,18 @@ export default function Dashboard() {
                         <strong className="mt-2">Email:</strong> {currentUser.email}
                         <br />
                         <strong>Display Name: </strong> {currentUser.displayName}
-                        <h5 className="mt-3">Languages I'm looking to learn:</h5>
+                        <h5 className="text-center mt-3">Languages I'm looking to learn:</h5>
                         <div className="text-center mt-3">
                             <div>
                                 { loading ? "Loading..." : userInfo.map((i) => {
                                     return <li key={`${i}`} style ={{listStyle:'none'}}>{i}</li>
                                 }) }
+                                <br />
+                                <h5>About me:</h5>
+                                { userDesc }
                             </div>
                         </div>
-                        <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
+                        <Link to="/update-profile" className="btn btn-primary w-100 mb-2 mt-4">Update Profile</Link>
                     </Card.Body>
                 </Card>                
             </Container>

@@ -1,15 +1,34 @@
 import React from 'react';
-import { Button, Card, Nav, Navbar, Container, Row, Col } from 'react-bootstrap';
+import { Button, Card, Nav, Navbar, Container, Row, Col, InputGroup, Form, FormControl } from 'react-bootstrap';
 import CardOne from './CardOne';
 import './FrontPage.scss';
 
 export default function FrontPageLogged() {
+
     return (
         <div>
-            <Navbar fixed="top" variant="pills" className="justify-content-end">
-                <Nav.Item>
-                    <Button href="/" variant="outline-info" size="sm" className="ms-2 me-3" to="/">Dashboard</Button>
-                </Nav.Item>
+            <Navbar fixed="top" variant="pills" className="w-100 align-items-center">
+                <Container>
+                    <Navbar.Brand className="mb-2" href="">MentorShip</Navbar.Brand>
+                </Container>
+                <Container fixed="top" className="d-flex justify-content-center w-100">
+                    <Form>
+                        <InputGroup id="search" name="search" className="mb-3 mt-2">
+                            <Button variant="outline-info" id="button-addon1">
+                            Search
+                            </Button>
+                            <FormControl
+                            type="search"
+                            placeholder="Search for users"
+                            />
+                        </InputGroup>
+                    </Form>
+                </Container>
+                <Container className="justify-content-end">
+                    <Nav.Item>
+                        <Button href="/" variant="outline-info" size="sm" className="" to="/">Dashboard</Button>
+                    </Nav.Item>
+                </Container>
             </Navbar>
             <Container>
                 <Card className="text-center mb-4">

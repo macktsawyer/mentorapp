@@ -1,26 +1,41 @@
 import React from 'react';
-import { Button, Card, Nav, Navbar, Container, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
+import { Button, Card, Nav, Navbar, Container, Row, Col, InputGroup, FormControl, Form } from 'react-bootstrap';
 import CardOne from './CardOne';
+import { Formik } from 'formik';
+import { useHistory } from 'react-router-dom';
 import './FrontPage.scss';
 
 export default function FrontPage() {
+    const history = useHistory();
+
     return (
         <div>
             <Navbar fixed="top" variant="pills" className="w-100 align-items-center">
-                <Container>
-                    <Navbar.Brand className="mb-2" href="">MentorShip</Navbar.Brand>
-                </Container>
-                <Container fixed="top" className="d-flex justify-content-center">
-                    <InputGroup className="mb-3 mt-2">
-                        <Button variant="outline-info" id="button-addon1">
-                        Search
-                        </Button>
-                        <FormControl
-                        aria-label="Example text with button addon"
-                        aria-describedby="basic-addon1"
-                        />
-                    </InputGroup>
-                </Container>
+                <Formik
+                initialValues={{
+                    search: '',
+                }}
+                onSubmit={async (values) => {
+                    history.push('/results')
+                }}
+                >
+                <Form>
+                    <Container>
+                        <Navbar.Brand className="mb-2" href="">MentorShip</Navbar.Brand>
+                    </Container>
+                    <Container fixed="top" className="d-flex justify-content-center">
+                        <InputGroup id="search" name="search" placeholder="Search for users" className="mb-3 mt-2">
+                            <Button variant="outline-info" id="button-addon1">
+                            Search
+                            </Button>
+                            <FormControl
+                            aria-label="Example text with button addon"
+                            aria-describedby="basic-addon1"
+                            />
+                        </InputGroup>
+                    </Container>
+                </Form>
+                </Formik>
                 <Container className="justify-content-end">
                     <Nav.Item>
                         <Button href="/Login" variant="outline-info" size="sm" className="ms-2 me-2 mb-2" to="/Login">Login</Button>

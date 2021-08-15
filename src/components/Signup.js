@@ -26,7 +26,7 @@ export default function Signup() {
             auth.onAuthStateChanged((user) => {
                 if (user) {
                     let uid = user.uid;
-                    db.collection('languages').doc(`${uid}`).set({ // Name document after UID again...or username/email?
+                    db.collection('userinfo').doc(`${uid}`).set({ 
                         languages: ["unset"],
                         uid: `${uid}`, //Working on establishing initial values
                         position: ''
