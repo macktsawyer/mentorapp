@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Nav, Navbar, Container, Row, Col, InputGroup, Form, FormControl } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import CardOne from './CardOne';
 import './FrontPage.scss';
 
 export default function FrontPageLogged() {
+    const [ searchValue, setSearchValue ] = useState('');
+    const history = useHistory();
+
+    function handleSearchChange(e) {
+        console.log(e)
+        setSearchValue(e.target.value);
+    }
+
+    function handleSearch() {
+        console.log("Searching for: ", searchValue)
+        history.push({
+            pathname: '/results',
+            search: searchValue,
+            state: searchValue
+        })
+    }
 
     return (
         <div>
@@ -12,7 +29,7 @@ export default function FrontPageLogged() {
                     <Navbar.Brand className="mb-2" href="">MentorShip</Navbar.Brand>
                 </Container>
                 <Container fixed="top" className="d-flex justify-content-center w-100">
-                    <Form>
+                    <Form onSubmit={handleSearch}>
                         <InputGroup id="search" name="search" className="mb-3 mt-2">
                             <Button variant="outline-info" id="button-addon1">
                             Search
@@ -20,6 +37,8 @@ export default function FrontPageLogged() {
                             <FormControl
                             type="search"
                             placeholder="Search for users"
+                            onChange = {handleSearchChange}
+                            value={searchValue}
                             />
                         </InputGroup>
                     </Form>
