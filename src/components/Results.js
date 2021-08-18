@@ -7,6 +7,7 @@ function Results() {
     const [searchResults, setSearchResults] = useState([]);
     const history = useHistory();
     const location = useLocation();
+    let searchCrit = location.search;
 
     useEffect(() => {
         console.log(location)
@@ -28,7 +29,7 @@ function Results() {
                 </Container>
             </Navbar>
             <Card>
-                {location.search}
+                { searchCrit }
             </Card>
         </div>
     )
