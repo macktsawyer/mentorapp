@@ -11,10 +11,19 @@ function Results() {
     let searchCrit = location.search;
     let quickResults = userinfo.where("languages", "array-contains", searchCrit);
 
+    quickResults.get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data())
+        })
+    }).catch((error) => {
+        console.log("Error: ", error)
+    })
+
     useEffect(() => {
         console.log(location)
         console.log(quickResults)
-    }, [location])
+    }, [location, quickResults])
 
     return (
         <div>
