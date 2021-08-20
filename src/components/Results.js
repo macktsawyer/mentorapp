@@ -7,23 +7,25 @@ function Results() {
     const [searchResults, setSearchResults] = useState([]);
     const history = useHistory();
     const location = useLocation();
-    const userinfo = db.collection("userinfo");
-    let searchCrit = location.search;
-    let quickResults = userinfo.where("languages", "array-contains", searchCrit);
+    const userInfo = db.collection("userinfo");
+    let searchCrit = location.state;
+    let quickResults = userInfo.where("languages", "array-contains", searchCrit);
 
     quickResults.get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             console.log(doc.id, " => ", doc.data())
+            setSearchResults(doc.data())
         })
     }).catch((error) => {
         console.log("Error: ", error)
     })
 
     useEffect(() => {
-        console.log(location)
+        // console.log(location)
         console.log(quickResults)
-    }, [location, quickResults])
+        console.log(searchResults)
+    }, [location, quickResults, searchResults])
 
     return (
         <div>
