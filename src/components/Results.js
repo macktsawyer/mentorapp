@@ -11,6 +11,8 @@ function Results() {
     let searchCrit = location.state;
     let quickResults = userInfo.where("languages", "array-contains", searchCrit);
 
+    // Needs useEffect to render API and needs conditional render like on Dashboard
+
     quickResults.get()
     .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -44,6 +46,7 @@ function Results() {
             </Navbar>
             <Card>
                 { searchCrit }
+                { searchResults } 
             </Card>
         </div>
     )
