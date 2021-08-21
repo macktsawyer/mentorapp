@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Nav, Navbar, Container } from 'react-bootstrap';
 import { db } from '../firebase';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Results() {
     const [searchResults, setSearchResults] = useState([]);
-    const history = useHistory();
     const location = useLocation();
     const userInfo = db.collection("userinfo");
     let searchCrit = location.state;
@@ -45,8 +44,7 @@ function Results() {
                 </Container>
             </Navbar>
             <Card>
-                { searchCrit }
-                { searchResults } 
+                { searchCrit } 
             </Card>
         </div>
     )

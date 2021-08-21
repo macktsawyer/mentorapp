@@ -93,13 +93,13 @@ export default function UpdateProfile() {
                     </Container>
                     <Container className="w-50">
                         <Card>
-                            <Card.Body>
+                            <Card.Body> 
                                 <Formik initialValues={{ languages: [], description: '', position: '' }} onSubmit={async (values) => {
                                     await sleep(500);
-                                    document.set({
-                                        languages: values.languages,
-                                        uid: `${currentUser.uid}`,
-                                        position: values.position,
+                                    document.set({ 
+                                        languages: values.languages,  //Formik sets the db values as input by users
+                                        uid: `${currentUser.uid}`,      // after having loaded them into initial values
+                                        position: values.position,          // automagically by using pre-made onsubmit functions
                                         description: values.description
                                     }).then(() => {
                                         history.push('/')
