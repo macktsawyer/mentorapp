@@ -19,22 +19,22 @@ export default function Dashboard() {
         const fetchInfo = async () => {
             try {
                 setLoading(true);
-                await sleep(500);
+                await sleep(500); //Sleep needed to slow things down
                 const ref = db.collection('userinfo').doc(`${userID}`);
                 const docs = await ref.get();
                 let langInfo = [];
-                [docs].forEach((doc) => {
+                [docs].forEach((doc) => { //Promise needs an array to push fetched info
                     let langData = doc.data();
                     langInfo.push(langData.languages);
                     setUserDesc(langData.description);
                 });
-                setUserInfo(langInfo[0]);
+                setUserInfo(langInfo[0]); //Set state to conditionally render later
             } catch (error) {
                 console.log("error: ", error);
             }
         };
         fetchInfo();
-        setLoading(false);
+        setLoading(false); //Set loading to false in order to allow async conditional loading of info in state
     }, [userID, userInfo])
 
     // Function to handle logout
@@ -71,7 +71,7 @@ export default function Dashboard() {
                         <h5 className="text-center mt-3">Languages I'm looking to learn:</h5>
                         <div className="text-center mt-3">
                             <div>
-                                { loading ? "Loading..." : userInfo.map((i) => {
+                                { loading ? "Loading..." : userInfo.map((i) => { //Conditionally rendering and listing of profile info
                                     return <li key={`${i}`} style ={{listStyle:'none'}}>{i}</li>
                                 }) }
                                 <br />

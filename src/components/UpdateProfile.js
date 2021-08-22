@@ -102,7 +102,7 @@ export default function UpdateProfile() {
                                         position: values.position,          // automagically by using pre-made onsubmit functions
                                         description: values.description
                                     }).then(() => {
-                                        history.push('/')
+                                        history.push('/') //Push dashboard upon update of info
                                     })
                                     console.log(values)
                                     }}>
