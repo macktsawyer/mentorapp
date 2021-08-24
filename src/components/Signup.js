@@ -29,6 +29,9 @@ export default function Signup() {
                     db.collection('userinfo').doc(`${uid}`).set({ 
                         languages: ["unset"],
                         uid: `${uid}`, //Working on establishing initial values
+                        description: 'Please update profile',
+                        userphoto: '',
+                        displayname: '',
                         position: ''
                     }) 
                 } else {

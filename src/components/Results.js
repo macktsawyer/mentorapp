@@ -13,7 +13,6 @@ function Results() {
     const userID = currentUser.uid;
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     let searchCrit = location.state;
-    let quickResults = userInfo.where("languages", "array-contains", searchCrit);
 
     // Needs useEffect to render API and needs conditional render like on Dashboard
 
@@ -21,15 +20,15 @@ function Results() {
         const fetchInfo = async () => {
             try {
                 setLoading(true);
-                await sleep(500); //Sleep needed to slow things down
+                await sleep(1000); //Sleep needed to slow things down
                 const ref = db.collection('userinfo').doc(`${userID}`);
                 const docs = await ref.get();
-                let resultInfo = [];
+                let memberInfo = [];
                 [docs].forEach((doc) => { //Promise needs an array to push fetched info
                     let resultData = doc.data();
-                    resultInfo.push(resultData.languages);
+                    memberInfo.push(resultData);
                 });
-                setSearchResults(resultInfo[0]); //Set state to conditionally render later
+                setSearchResults(memberInfo); //Set state to conditionally render later
             } catch (error) {
                 console.log("error: ", error);
             }
@@ -37,23 +36,6 @@ function Results() {
         fetchInfo();
         setLoading(false); //Set loading to false in order to allow async conditional loading of info in state
     }, [userID, userInfo])
-
-
-    // quickResults.get()
-    // .then((querySnapshot) => {
-    //     querySnapshot.forEach((doc) => {
-    //         console.log(doc.id, " => ", doc.data())
-    //         setSearchResults(doc.data())
-    //     })
-    // }).catch((error) => {
-    //     console.log("Error: ", error)
-    // })
-
-    useEffect(() => {
-        // console.log(location)
-        console.log(quickResults)
-        console.log(searchResults)
-    }, [location, quickResults, searchResults])
 
     return (
         <div>
@@ -73,7 +55,14 @@ function Results() {
             <Card>
                 { searchCrit } 
                 { loading ? "Loading..." : searchResults.map((i) => { //Conditionally rendering and listing of profile info
-                                    return <li key={`${i}`} style ={{listStyle:'none'}}>{i}</li>
+                                    return (
+                                    <Card className="w-25">
+                                        <img style={{width: "50px", height: "50px"}} src={i.userphoto}></img>
+                                        <h5 key={i.displayname}> {i.displayname} </h5>
+                                        <li key={`${i.languages}`} style ={{listStyle:'none'}}>{i.languages}</li>
+                                        <p>{i.description}</p>
+                                    </Card>
+                                    )
                                 }) }
             </Card>
         </div>

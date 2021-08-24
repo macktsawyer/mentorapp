@@ -100,7 +100,9 @@ export default function UpdateProfile() {
                                         languages: values.languages,  //Formik sets the db values as input by users
                                         uid: `${currentUser.uid}`,      // after having loaded them into initial values
                                         position: values.position,          // automagically by using pre-made onsubmit functions
-                                        description: values.description
+                                        description: values.description,
+                                        displayname: `${currentUser.displayName}`,
+                                        userphoto: `${currentUser.photoURL}`
                                     }).then(() => {
                                         history.push('/') //Push dashboard upon update of info
                                     })
@@ -169,7 +171,6 @@ export default function UpdateProfile() {
                                         <div className="text-center mt-2">
                                             <Button type="submit">Update Profile</Button>
                                         </div>
-                                        {<pre>{JSON.stringify(values, null, 2)}</pre>}
                                     </Form>
                                     )}
                                 </Formik>
