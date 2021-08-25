@@ -42,12 +42,6 @@ function Results() {
             <Navbar fixed="top" variant="pills">
                 <Container className="justify-content-end">
                         <Nav.Item>
-                            <Button href="/Login" variant="outline-info" size="sm" className="ms-2" to="/Login">Login</Button>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Button href="/Signup" variant="outline-info" size="sm" className="ms-2" to="/Signup">Sign Up</Button>
-                        </Nav.Item>
-                        <Nav.Item>
                             <Button href="/" variant="outline-info" size="sm" className="ms-2" to="/">Dashboard</Button>
                         </Nav.Item>
                 </Container>
@@ -57,7 +51,7 @@ function Results() {
                 { loading ? "Loading..." : searchResults.map((i) => { //Conditionally rendering and listing of profile info
                                     return (
                                     <Card className="w-25">
-                                        <img style={{width: "50px", height: "50px"}} src={i.userphoto}></img>
+                                        <img alt="display" style={{width: "50px", height: "50px"}} src={i.userphoto}></img>
                                         <h5 key={i.displayname}> {i.displayname} </h5>
                                         <li key={`${i.languages}`} style ={{listStyle:'none'}}>{i.languages}</li>
                                         <p>{i.description}</p>
