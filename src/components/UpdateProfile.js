@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Form, Button, Card, Alert, Container, Row, Col } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
@@ -15,10 +15,32 @@ export default function UpdateProfile() {
     const { currentUser, updatePassword, updateEmail, updateProfile, updatePicture } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [profileInfo, setProfileInfo] = useState('');
     const history = useHistory();
     const userID = currentUser.uid;
     const document = db.collection('userinfo').doc(userID);
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+    useEffect(() => {
+        const fetchInfo = async () => {
+            try {
+                setLoading('true');
+                await sleep(1000); //Sleep needed to slow things down
+                const ref = db.collection('userinfo').doc(`${userID}`);
+                const docs = await ref.get();
+                let memberInfo = [];
+                [docs].forEach((doc) => { //Promise needs an array to push fetched info
+                    let resultData = doc.data();
+                    memberInfo.push(resultData);
+                });
+                setProfileInfo(memberInfo); //Set state to conditionally render later
+            } catch (error) {
+                console.log("error: ", error);
+            }
+        };
+        fetchInfo();
+        setLoading('false'); //Set loading to false in order to allow async conditional loading of info in state
+    }, [userID])
 
     function handleUpdate(e) {
         e.preventDefault();
