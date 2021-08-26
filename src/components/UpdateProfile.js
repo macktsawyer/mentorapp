@@ -45,13 +45,13 @@ export default function UpdateProfile() {
     function handleUpdate(e) {
         e.preventDefault();
 
-        const promises = [];
+        const promises = []; 
         setLoading('true');
         setError('');
-        if (emailRef.current.value !== currentUser.email) {
+        if (emailRef.current.value !== currentUser.email) { //Ensure email isn't already being used
             promises.push(updateEmail(emailRef.current.value))
         }
-        if (screenRef.current.value !== currentUser.displayName) {
+        if (screenRef.current.value !== currentUser.displayName) { //Ensure display name isn't the same as current
             promises.push(updateProfile(screenRef.current.value))
         }
         if (picRef.current.value !== currentUser.photoURL) {

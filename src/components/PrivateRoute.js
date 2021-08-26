@@ -7,7 +7,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
     return (
         <Route 
             {...rest}
-            render={props => {
+            render={props => { // Establishes private route for only signed in users
                return currentUser ? <Component {...props} /> : <Redirect to= "/front-page" />
             }}
         >

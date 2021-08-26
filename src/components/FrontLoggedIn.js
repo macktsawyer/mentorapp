@@ -10,14 +10,14 @@ export default function FrontPageLogged() {
 
     function handleSearchChange(e) {
         console.log(e)
-        setSearchValue(e.target.value);
+        setSearchValue(e.target.value); //Store search state
     }
 
     function handleSearch() {
         console.log("Searching for: ", searchValue)
         history.push({
             pathname: '/results',
-            search: searchValue,
+            search: searchValue, //Pass search query
             state: searchValue
         })
     }
