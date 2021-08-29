@@ -10,8 +10,9 @@ import Login from './Login';
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import FrontPage from "./FrontPage";
-import FrontPageLogged from "./FrontLoggedIn"
-import Results from "./Results"
+import FrontPageLogged from "./FrontLoggedIn";
+import Results from "./Results";
+import Inbox from "./Inbox";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
             <Switch>
               <PrivateRoute exact path="/" component={Dashboard} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
-              <PrivateRoute path="/front-page-logged" component={FrontPageLogged} />              
+              <PrivateRoute path="/front-page-logged" component={FrontPageLogged} />
+              <PrivateRoute path="/inbox" component={Inbox} />              
               <Route path="/signup" component={Signup} />
               <Route path="/results" component={Results} />
               <Route path="/login" component={Login} />

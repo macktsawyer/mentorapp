@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Nav, Navbar, Container, Row, Col, InputGroup, Form, FormControl } from 'react-bootstrap';
+import { Button, Card, Nav, Navbar, Container, Row, Col, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import CardOne from './CardOne';
 import './FrontPage.scss';
@@ -26,21 +26,29 @@ export default function FrontPageLogged() {
         <div>
             <Navbar fixed="top" variant="pills" className="w-100 align-items-center">
                 <Container>
-                    <Navbar.Brand className="mb-2" href="">MentorShip</Navbar.Brand>
+                    <Navbar.Brand className="mb-2" href=""><h5>MentorShip</h5></Navbar.Brand>
                 </Container>
-                <Container fixed="top" className="d-flex justify-content-center w-100">
-                    <Form onSubmit={handleSearch}>
-                        <InputGroup id="search" name="search" className="mb-3 mt-2">
-                            <Button variant="outline-info" id="button-addon1">
-                            Search
-                            </Button>
-                            <FormControl
-                            type="search"
-                            placeholder="Search for users"
-                            onChange = {handleSearchChange}
-                            value={searchValue}
-                            />
-                        </InputGroup>
+                <Container fixed="top" className="d-flex justify-content-center">
+                    <Form className="align-items-center w-100" onSubmit={handleSearch}>
+                        <div className="d-flex">
+                            <Form.Label className="mt-2 w-50"><h5>What I would like to learn:</h5></Form.Label>
+                            <Form.Control 
+                                className="w-50"
+                                as="select"
+                                value={searchValue}
+                                onChange={handleSearchChange}>
+                                <option>\/ Open to select language \/</option>
+                                <option value="Javascript">Javascript</option>
+                                <option value="Ruby">Ruby</option>
+                                <option value="C">C</option>
+                                <option value="C++">C++</option>
+                                <option value="C#">C#</option>
+                                <option value="Java">Java</option>
+                                <option value="Python">Python</option>
+                                <option value="PHP">PHP</option>
+                            </Form.Control>
+                            <Button variant="outline-info" type="submit">Go!</Button>
+                        </div>
                     </Form>
                 </Container>
                 <Container className="justify-content-end">

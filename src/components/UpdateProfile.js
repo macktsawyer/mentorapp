@@ -15,6 +15,7 @@ export default function UpdateProfile() {
     const { currentUser, updatePassword, updateEmail, updateProfile, updatePicture } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [proLoading, setProLoading] = useState(false);
     const [profileInfo, setProfileInfo] = useState('');
     const history = useHistory();
     const userID = currentUser.uid;
@@ -40,13 +41,13 @@ export default function UpdateProfile() {
         };
         fetchInfo();
         setLoading('false'); //Set loading to false in order to allow async conditional loading of info in state
-    }, [userID])
+    }, [userID, profileInfo])
 
     function handleUpdate(e) {
         e.preventDefault();
 
         const promises = []; 
-        setLoading('true');
+        setProLoading('true');
         setError('');
         if (emailRef.current.value !== currentUser.email) { //Ensure email isn't already being used
             promises.push(updateEmail(emailRef.current.value))
@@ -65,7 +66,7 @@ export default function UpdateProfile() {
             history.push('/')
         }).catch(() => {
         setError('Failed to update account')}).finally(() =>
-        setLoading('false'))
+        setProLoading('false'))
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError('Passwords do not match');
         }
@@ -106,7 +107,7 @@ export default function UpdateProfile() {
                                             <Form.Control type="password" ref={passwordConfirmRef} placeholder="Keep blank to remain the same" />
                                         </Form.Group>
                                         <div className="text-center">
-                                            <Button disabled={loading} className="w-40 mt-2" type="submit">Update Profile</Button>
+                                            <Button disabled={proLoading} className="w-40 mt-2" type="submit">Update Profile</Button>
                                         </div>
                                     </Form>
                                 </div>
@@ -173,20 +174,26 @@ export default function UpdateProfile() {
                                                     <Field className="me-1" type="checkbox" name="position" value="student"></Field>
                                                     </Col>
                                                     <Col>
-                                                    <Form.Label className="me-1">Mentor</Form.Label>
+                                                    <Form.Label className="me-1">Mentor -</Form.Label>
                                                     <Field className="me-1" type="checkbox" name="position" value="mentor"></Field>
                                                     </Col>
                                                     <Col>
-                                                    <Form.Label className="me-1">Both</Form.Label>
+                                                    <Form.Label className="me-1">Both -</Form.Label>
                                                     <Field className="me-1" type="checkbox" name="position" value="both"></Field>
                                                     </Col>
                                                 </Row>
                                                 <br />
                                                 <Row>
                                                 <h4 className="mb-4">Tell us a bit about yourself!</h4>
-                                                    <Field as="textarea" id="description" maxLength="300" name="description" type="textarea" placeholder="Describe Yourself">
+                                                    <Form.Control as="textarea" 
+                                                    id="description" 
+                                                    maxLength="300" 
+                                                    name="description" 
+                                                    type="textarea" 
+                                                    placeholder="Describe Yourself"
+                                                    defaultValue={profileInfo[0].description}>
 
-                                                    </Field>
+                                                    </Form.Control>
                                                 </Row>
                                             </Container>
                                         </Form.Group>

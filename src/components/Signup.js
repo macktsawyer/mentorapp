@@ -28,12 +28,16 @@ export default function Signup() {
                     let uid = user.uid;
                     db.collection('userinfo').doc(`${uid}`).set({ 
                         languages: ["unset"],
-                        uid: `${uid}`, //Working on establishing initial values
+                        uid: `${uid}`, //Working on establishing default values
                         description: 'Please update profile',
-                        userphoto: '',
-                        displayname: '',
-                        position: ''
-                    }) 
+                        userphoto: 'https://static.libertyprim.com/files/varietes/pomme-akane-large.jpg?1569320193',
+                        displayname: 'Newman',
+                        position: 'both'
+                    }).then(() => {
+                        user.updateProfile({
+                            displayName: 'Newman',
+                            photoURL: 'https://static.libertyprim.com/files/varietes/pomme-akane-large.jpg?1569320193'
+                        })})
                 } else {
                     console.log("Error with signup")
                 }
