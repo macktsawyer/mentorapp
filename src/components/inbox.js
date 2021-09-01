@@ -15,7 +15,7 @@ function Inbox() {
         try {
             setLoading(true);
             let queryResults = [];
-            await sleep(5000); //Sleep needed to slow things down
+            await sleep(2000); //Sleep needed to slow things down
             for (let i of partnerUID) {
                 db.collection('userinfo')
                 .where("uid", "==", i)
@@ -39,7 +39,7 @@ function Inbox() {
         const fetchMessages = async () => {
             try {
                 setLoading(true);
-                await sleep(500); //Sleep needed to slow things down
+                await sleep(2000); //Sleep needed to slow things down
                 const ref = db.collection('messages').doc(`${userID}`);
                 const docs = await ref.get();
                 let messageInfo = [];
