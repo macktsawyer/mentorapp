@@ -11,31 +11,31 @@ function Inbox() {
     const [partners, setPartners] = useState([]);
     const { currentUser } = useAuth();
     const userID = currentUser.uid;    
-    const fetchDisplay = async (partnerUID) => {
-        try {
-            setLoading(true);
-            let queryResults = [];
-            await sleep(2000); //Sleep needed to slow things down
-            for (let i of partnerUID) {
-                db.collection('userinfo')
-                .where("uid", "==", i)
-                .onSnapshot((querySnapshot) => {
-                    let quickSnapshot = [];
-                    querySnapshot.forEach((doc) => {
-                        quickSnapshot.push(doc.data())
-                    })
-                    queryResults.push(quickSnapshot)
-                })
-            setPartners(queryResults)
-            console.log(queryResults)
-            setLoading(false)
-            }
-        } catch (error) {
-            console.log("error: ", error);
-        }
-    };
+
 
     useEffect(() => {
+        const fetchDisplay = async (partnerUID) => {
+            try {
+                setLoading(true);
+                await sleep(2000); //Sleep needed to slow things down
+                let queryResults = [];
+                for (let i of partnerUID) {
+                    db.collection('userinfo')
+                    .where("uid", "==", i)
+                    .onSnapshot((querySnapshot) => {
+                        let quickSnapshot = [];
+                        querySnapshot.forEach((doc) => {
+                            quickSnapshot.push(doc.data())
+                        })
+                        queryResults.push(quickSnapshot[0].displayname)
+                    })
+                setPartners(queryResults)
+                }
+            } catch (error) {
+                console.log("error: ", error);
+            }
+            setLoading(false)
+        };
         const fetchMessages = async () => {
             try {
                 setLoading(true);
@@ -59,7 +59,7 @@ function Inbox() {
             fetchDisplay(partnerUID)
         }
         setLoading(false); //Set loading to false in order to allow async conditional loading of info in state
-    }, [userID, fetchDisplay, partnerUID])
+    }, [userID, partnerUID])
 
     return (
         <div>
@@ -73,10 +73,10 @@ function Inbox() {
                 <Row>
                     <Col xs="4">
                     <Card className="text-center"><h4>Messages</h4></Card>
-                    { loading ? "Loading..." : partners.map((i) => { //Conditionally rendering and listing of profile info
+                    { loading ? "Loading..." : partners.map((i) => { //Conditionally rendering and listing of message partners
                                     return (
-                                    <Card className="text-center justify-content-center mt-2 h-50 w-100">
-                                        <h5 key={i.uid}> {i.displayname} </h5>
+                                    <Card key={i} className="text-center justify-content-center mt-2 h-50 w-100">
+                                        <h5 key={i.id}> {i} </h5>
                                     </Card>
                                     )
                                 }) }
