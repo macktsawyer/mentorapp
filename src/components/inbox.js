@@ -22,7 +22,8 @@ function Inbox() {
                 for (let i of partnerUID) {
                     db.collection('userinfo')
                     .where("uid", "==", i)
-                    .onSnapshot((querySnapshot) => {
+                    .get()
+                    .then((querySnapshot) => {
                         let quickSnapshot = [];
                         querySnapshot.forEach((doc) => {
                             quickSnapshot.push(doc.data())
@@ -59,7 +60,7 @@ function Inbox() {
             fetchDisplay(partnerUID)
         }
         setLoading(false); //Set loading to false in order to allow async conditional loading of info in state
-    }, [userID, partnerUID])
+    }, [userID, partnerUID, partners])
 
     return (
         <div>
@@ -73,7 +74,7 @@ function Inbox() {
                 <Row>
                     <Col xs="4">
                     <Card className="text-center"><h4>Messages</h4></Card>
-                    { loading ? "Loading..." : partners.map((i) => { //Conditionally rendering and listing of message partners
+                    { loading ? "Loading..." : [partners].forEach((i) => { //Conditionally rendering and listing of message partners
                                     return (
                                     <Card key={i} className="text-center justify-content-center mt-2 h-50 w-100">
                                         <h5 key={i.id}> {i} </h5>
