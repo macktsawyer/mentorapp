@@ -12,7 +12,6 @@ function Inbox() {
     const { currentUser } = useAuth();
     const userID = currentUser.uid;    
 
-
     useEffect(() => {
         const fetchDisplay = async (partnerUID) => {
             try {
@@ -20,7 +19,7 @@ function Inbox() {
                 await sleep(2000); //Sleep needed to slow things down
                 let queryResults = [];
                 for (let i of partnerUID) {
-                    db.collection('userinfo')
+                    db.collection('userinfo') // Search for document of specific users as found in fetch messages
                     .where("uid", "==", i)
                     .get()
                     .then((querySnapshot) => {
@@ -28,7 +27,7 @@ function Inbox() {
                         querySnapshot.forEach((doc) => {
                             quickSnapshot.push(doc.data())
                         })
-                        queryResults.push(quickSnapshot[0].displayname)
+                        queryResults.push(quickSnapshot[0].displayname) // Add users to a list of users who have message currentUser
                     })
                 setPartners(queryResults)
                 }
@@ -60,7 +59,7 @@ function Inbox() {
             fetchDisplay(partnerUID)
         }
         setLoading(false); //Set loading to false in order to allow async conditional loading of info in state
-    }, [userID, partnerUID, partners])
+    }, [userID, partnerUID, partners, loading])
 
     return (
         <div>
@@ -74,7 +73,7 @@ function Inbox() {
                 <Row>
                     <Col xs="4">
                     <Card className="text-center"><h4>Messages</h4></Card>
-                    { loading ? "Loading..." : [partners].forEach((i) => { //Conditionally rendering and listing of message partners
+                    { loading ? "Loading..." : partners.map((i) => { //Conditionally rendering and listing of message partners
                                     return (
                                     <Card key={i} className="text-center justify-content-center mt-2 h-50 w-100">
                                         <h5 key={i.id}> {i} </h5>
