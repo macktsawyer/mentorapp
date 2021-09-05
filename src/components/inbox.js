@@ -55,7 +55,7 @@ function Inbox() {
             }
         };
         fetchMessages();
-        if (partnerUID) {
+        if (partnerUID) { // If partnerUID is present, then call on the inbox display
             fetchDisplay(partnerUID)
         }
         setLoading(false); //Set loading to false in order to allow async conditional loading of info in state
