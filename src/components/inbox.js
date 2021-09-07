@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Card, Col, Row, Navbar, Nav, Button, InputGroup, FormControl } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { db } from '../firebase';
@@ -12,30 +12,31 @@ function Inbox() {
     const { currentUser } = useAuth();
     const userID = currentUser.uid;    
 
-    useEffect(() => {
-        const fetchDisplay = async (partnerUID) => {
-            try {
-                setLoading(true);
-                await sleep(2000); //Sleep needed to slow things down
-                let queryResults = [];
-                for (let i of partnerUID) {
-                    db.collection('userinfo') // Search for document of specific users as found in fetch messages
-                    .where("uid", "==", i)
-                    .get()
-                    .then((querySnapshot) => {
-                        let quickSnapshot = [];
-                        querySnapshot.forEach((doc) => {
-                            quickSnapshot.push(doc.data())
-                        })
-                        queryResults.push(quickSnapshot[0].displayname) // Add users to a list of users who have message currentUser
+    const fetchDisplay = useCallback( async (partnerUID) => {
+        try {
+            setLoading(true);
+            await sleep(2000); //Sleep needed to slow things down
+            let queryResults = [];
+            for (let i of partnerUID) {
+                db.collection('userinfo') // Search for document of specific users as found in fetch messages
+                .where("uid", "==", i)
+                .get()
+                .then((querySnapshot) => {
+                    let quickSnapshot = [];
+                    querySnapshot.forEach((doc) => {
+                        quickSnapshot.push(doc.data())
                     })
-                setPartners(queryResults)
-                }
-            } catch (error) {
-                console.log("error: ", error);
+                    queryResults.push(quickSnapshot[0].displayname) // Add users to a list of users who have message currentUser
+                })
+            setPartners(queryResults)
             }
-            setLoading(false)
-        };
+        } catch (error) {
+            console.log("error: ", error);
+        }
+        setLoading(false)
+    },[]);
+
+    useEffect(() => {
         const fetchMessages = async () => {
             try {
                 setLoading(true);
@@ -59,7 +60,7 @@ function Inbox() {
             fetchDisplay(partnerUID)
         }
         setLoading(false); //Set loading to false in order to allow async conditional loading of info in state
-    }, [userID, partnerUID, partners, loading])
+    }, [userID, fetchDisplay, partnerUID, partners, loading])
 
     return (
         <div>
