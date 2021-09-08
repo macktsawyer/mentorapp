@@ -1,5 +1,5 @@
 {
-  "homepage": "https://macktsawyer.github.io/mentorapp/",
+  "homepage": ".",
   "proxy": "http://localhost:3000",
   "name": "mentor-app",
   "version": "0.1.0",
