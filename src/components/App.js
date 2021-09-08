@@ -2,7 +2,7 @@ import '../App.scss';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import { AuthProvider } from '../contexts/AuthContext';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import UpdateProfile from './UpdateProfile';
 import Signup from './Signup';
