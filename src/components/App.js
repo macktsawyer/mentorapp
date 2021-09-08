@@ -22,7 +22,7 @@ function App() {
         <Router>
           <AuthProvider>
             <Switch>
-              <PrivateRoute exact path="/" component={Dashboard} />
+              <PrivateRoute exact path="https://macktsawyer.github.io/mentorapp/" component={Dashboard} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <PrivateRoute path="/front-page-logged" component={FrontPageLogged} />
               <PrivateRoute path="/inbox" component={Inbox} />              
