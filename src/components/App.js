@@ -19,10 +19,10 @@ function App() {
     <Container className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}>
       <div className="w-100">
-        <Router basename="/">
+        <Router>
           <AuthProvider>
             <Switch>
-              <PrivateRoute path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/" component={Dashboard} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <PrivateRoute path="/front-page-logged" component={FrontPageLogged} />
               <PrivateRoute path="/inbox" component={Inbox} />              
@@ -30,7 +30,7 @@ function App() {
               <Route path="/results" component={Results} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
-              <Route path="/#/front-page" component={FrontPage} />
+              <Route path="/front-page" component={FrontPage} />
             </Switch>
           </AuthProvider>
         </Router>

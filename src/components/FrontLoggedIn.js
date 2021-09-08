@@ -53,7 +53,7 @@ export default function FrontPageLogged() {
                 </Container>
                 <Container className="justify-content-end">
                     <Nav.Item>
-                        <Button href="/dashboard" variant="outline-info" size="sm" className="" to="/dashboard">Dashboard</Button>
+                        <Button href="/" variant="outline-info" size="sm" className="" to="/">Dashboard</Button>
                     </Nav.Item>
                 </Container>
             </Navbar>

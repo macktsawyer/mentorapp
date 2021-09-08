@@ -42,7 +42,7 @@ function Results() {
                         <Button href="/front-page-logged" variant="outline-info" to="/front-page">Home</Button>
                     </Nav.Item>
                     <Nav.Item>
-                        <Button href="/dashboard" variant="outline-info" size="sm" className="ms-2" to="/dashboard">Dashboard</Button>
+                        <Button href="/" variant="outline-info" size="sm" className="ms-2" to="/">Dashboard</Button>
                     </Nav.Item>
                 </Container>
             </Navbar>
