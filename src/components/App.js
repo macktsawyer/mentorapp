@@ -19,10 +19,10 @@ function App() {
     <Container className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}>
       <div className="w-100">
-        <Router basename="/index.html">
+        <Router basename="/front-page">
           <AuthProvider>
             <Switch>
-              <PrivateRoute exact path="/" component={Dashboard} />
+              <PrivateRoute path="/dashboard" component={Dashboard} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <PrivateRoute path="/front-page-logged" component={FrontPageLogged} />
               <PrivateRoute path="/inbox" component={Inbox} />              
