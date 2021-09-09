@@ -30,7 +30,7 @@ function App() {
               <Route path="/mentorapp/#/results" component={Results} />
               <Route path="/mentorapp/#/login" component={Login} />
               <Route path="/mentorapp/#/forgot-password" component={ForgotPassword} />
-              <Route path="/mentorapp/#/front-page" component={FrontPage} />
+              <Route path="/front-page" component={FrontPage} />
             </Switch>
           </AuthProvider>
         </Router>
