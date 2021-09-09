@@ -19,7 +19,7 @@ function App() {
     <Container className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}>
       <div className="w-100">
-        <Router>
+        <Router basename="/mentorapp/#">
           <AuthProvider>
             <Switch>
               <PrivateRoute exact path="/" component={Dashboard} />
