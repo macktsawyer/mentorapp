@@ -13,7 +13,7 @@ export default function FrontPage() {
                 </Container>
                 <Container className="justify-content-end">
                     <Nav.Item>
-                        <Button href="/mentorapp/#/signup" variant="outline-info" size="sm" className="ms-2 me-2 mb-2" to="/Login">Login</Button>
+                        <Button href="/mentorapp/#/login" variant="outline-info" size="sm" className="ms-2 me-2 mb-2" to="/Login">Login</Button>
                     </Nav.Item>
                     <Nav.Item>
                         <Button href="/mentorapp/#/signup" variant="outline-info" size="sm" className="ms-1 me-4 mb-2" to="/Signup">Sign Up</Button>
