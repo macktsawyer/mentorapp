@@ -23,9 +23,9 @@ function App() {
           <AuthProvider>
             <Switch>
               <PrivateRoute exact path="/" component={Dashboard} />
-              <PrivateRoute path="/update-profile" component={UpdateProfile} />
-              <PrivateRoute path="/front-page-logged" component={FrontPageLogged} />
-              <PrivateRoute path="/inbox" component={Inbox} />              
+              <PrivateRoute path="/mentorapp/#/update-profile" component={UpdateProfile} />
+              <PrivateRoute path="/mentorapp/#/front-page-logged" component={FrontPageLogged} />
+              <PrivateRoute path="/mentorapp/#/inbox" component={Inbox} />              
               <Route path="/mentorapp/#/signup" component={Signup} />
               <Route path="/mentorapp/#/results" component={Results} />
               <Route path="/mentorapp/#/login" component={Login} />
