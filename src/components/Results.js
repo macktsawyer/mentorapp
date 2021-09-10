@@ -3,6 +3,7 @@ import { Button, Card, Nav, Navbar, Container } from 'react-bootstrap';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { useLocation } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap'
 
 function Results() {
     const [searchResults, setSearchResults] = useState([]);
@@ -39,10 +40,14 @@ function Results() {
             <Navbar fixed="top" variant="pills">
                 <Container className="justify-content-end">
                     <Nav.Item>
-                        <Button href="/front-page-logged" variant="outline-info" to="/front-page">Home</Button>
+                        <LinkContainer to="front-page-logged">
+                        <Button variant="outline-info">Home</Button>
+                        </LinkContainer>
                     </Nav.Item>
                     <Nav.Item>
-                        <Button href="/" variant="outline-info" size="sm" className="ms-2" to="/">Dashboard</Button>
+                        <LinkContainer to="/dashboard">
+                        <Button variant="outline-info">Dashboard</Button>
+                        </LinkContainer>
                     </Nav.Item>
                 </Container>
             </Navbar>

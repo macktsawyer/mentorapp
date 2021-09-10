@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Alert, Navbar, Nav, Container } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { LinkContainer } from 'react-router-bootstrap';
 import { db } from '../firebase';
 
 
@@ -53,10 +54,14 @@ export default function Dashboard() {
         <>
             <Navbar fixed="top" variant="pills" className="me-2 justify-content-end">
                 <Nav.Item className="ms-2 me-2 mb-2">
-                    <Button href="/inbox" variant="outline-info" to="/inbox">Inbox</Button>
+                    <LinkContainer to="/inbox">
+                    <Button href="/inbox" variant="outline-info" >Inbox</Button>
+                    </LinkContainer>
                 </Nav.Item>
                 <Nav.Item className="ms-2 me-2 mb-2">
-                    <Button href="/front-page-logged" variant="outline-info" to="/front-page">Home</Button>
+                    <LinkContainer to="/front-page-logged">
+                    <Button href="/front-page-logged" variant="outline-info">Home</Button>
+                    </LinkContainer>
                 </Nav.Item>
             </Navbar>
             <Container className="d-flex justify-content-center">
@@ -82,7 +87,10 @@ export default function Dashboard() {
                                 { userDesc }
                             </div>
                         </div>
-                        <Link to="/update-profile" className="btn btn-primary w-100 mb-2 mt-4">Update Profile</Link>
+                        <LinkContainer to="/update-profile">
+                            <Button className="btn btn-primary w-100 mb-2 mt-4">Update Profile
+                            </Button>
+                        </LinkContainer>
                     </Card.Body>
                 </Card>                
             </Container>

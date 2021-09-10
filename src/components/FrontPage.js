@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card, Nav, Navbar, Container, Row, Col } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import CardOne from './CardOne';
 import './FrontPage.scss';
 
@@ -13,10 +14,14 @@ export default function FrontPage() {
                 </Container>
                 <Container className="justify-content-end">
                     <Nav.Item>
-                        <Button href="/mentorapp/#/login" variant="outline-info" size="sm" className="ms-2 me-2 mb-2" to="/mentorapp/#/login">Login</Button>
+                        <LinkContainer to="/login">
+                            <Button variant="outline-info" size="sm" className="ms-2 me-2 mb-2" >Login</Button>
+                        </LinkContainer>
                     </Nav.Item>
                     <Nav.Item>
-                        <Button href="/mentorapp/#/signup" variant="outline-info" size="sm" className="ms-1 me-4 mb-2" to="/mentorapp/#/signup">Sign Up</Button>
+                        <LinkContainer to="/signup">
+                        <Button variant="outline-info" size="sm" className="ms-1 me-4 mb-2">Sign Up</Button>
+                        </LinkContainer>
                     </Nav.Item>
                 </Container>
             </Navbar>
@@ -37,7 +42,9 @@ export default function FrontPage() {
                             <Card.Img variant="top" src="https://images.pexels.com/photos/2173508/pexels-photo-2173508.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></Card.Img>
                             <Card.Body className="text-center">
                             Students not only have the opportunity to broaden their knowledge but the student will objectively be able to quantify some of their learning experience through their lessons and student rating. 
-                                <Button href="/Signup" className="w-100 text-center mt-2">Get Started</Button>
+                            <LinkContainer to="/signup">
+                            <Button className="w-100 text-center mt-2">Get Started</Button>                            
+                            </LinkContainer>
                             </Card.Body>
                         </Card>
                     </Col>

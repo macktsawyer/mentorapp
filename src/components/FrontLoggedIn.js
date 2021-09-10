@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, Nav, Navbar, Container, Row, Col, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import CardOne from './CardOne';
 import './FrontPage.scss';
 
@@ -53,7 +54,9 @@ export default function FrontPageLogged() {
                 </Container>
                 <Container className="justify-content-end">
                     <Nav.Item>
-                        <Button href="/" variant="outline-info" size="sm" className="" to="/">Dashboard</Button>
+                        <LinkContainer to="/dashboard">
+                            <Button variant="outline-info" size="sm">Dashboard</Button>
+                        </LinkContainer>
                     </Nav.Item>
                 </Container>
             </Navbar>
@@ -73,8 +76,10 @@ export default function FrontPageLogged() {
                         <Card>
                             <Card.Img variant="top" src="https://images.pexels.com/photos/2173508/pexels-photo-2173508.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></Card.Img>
                             <Card.Body className="text-center">
-                            Students not only have the opportunity to broaden their knowledge but the student will objectively be able to quantify some of their learning experience through their lessons and student rating. 
+                            Students not only have the opportunity to broaden their knowledge but the student will objectively be able to quantify some of their learning experience through their lessons and student rating.
+                                <LinkContainer to="/signup"> 
                                 <Button href="/Signup" className="w-100 text-center mt-2">Get Started</Button>
+                                </LinkContainer>
                             </Card.Body>
                         </Card>
                     </Col>

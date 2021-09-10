@@ -22,14 +22,16 @@ function App() {
         <Router>
           <AuthProvider>
             <Switch>
-              <PrivateRoute exact path="/" component={Dashboard} />
-              <PrivateRoute path="/mentorapp/#/update-profile" component={UpdateProfile} />
-              <PrivateRoute path="/mentorapp/#/front-page-logged" component={FrontPageLogged} />
-              <PrivateRoute path="/mentorapp/#/inbox" component={Inbox} />              
-              <Route path="/mentorapp/#/signup" component={Signup} />
-              <Route path="/mentorapp/#/results" component={Results} />
-              <Route path="/mentorapp/#/login" component={Login} />
-              <Route path="/mentorapp/#/forgot-password" component={ForgotPassword} />
+              <PrivateRoute path="/dashboard" component={Dashboard} />
+              <PrivateRoute path="/update-profile" component={UpdateProfile} />
+              <PrivateRoute path="/front-page-logged" component={FrontPageLogged} />
+              <PrivateRoute path="/inbox" component={Inbox} />              
+              <Route path="/signup" component={Signup}>
+                <Signup />
+              </Route>
+              <Route path="/results" component={Results} />
+              <Route path="/login" component={Login} />
+              <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/front-page" component={FrontPage} />
             </Switch>
           </AuthProvider>

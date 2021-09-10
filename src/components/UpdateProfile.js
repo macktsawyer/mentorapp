@@ -17,6 +17,7 @@ export default function UpdateProfile() {
     const [loading, setLoading] = useState(false);
     const [proLoading, setProLoading] = useState(false);
     const [profileInfo, setProfileInfo] = useState('');
+    const [userDesc, setUserDesc] = useState();
     const history = useHistory();
     const userID = currentUser.uid;
     const document = db.collection('userinfo').doc(userID);
@@ -35,6 +36,7 @@ export default function UpdateProfile() {
                     memberInfo.push(resultData);
                 });
                 setProfileInfo(memberInfo); //Set state to conditionally render later
+                setUserDesc(memberInfo[0].description)
             } catch (error) {
                 console.log("error: ", error);
             }
@@ -183,6 +185,9 @@ export default function UpdateProfile() {
                                                     </Col>
                                                 </Row>
                                                 <br />
+                                                <div>
+                                                    {loading === false && <h5>Loading...</h5>}
+                                                </div>
                                                 <Row>
                                                 <h4 className="mb-4">Tell us a bit about yourself!</h4>
                                                     <Form.Control as="textarea" 
@@ -191,7 +196,7 @@ export default function UpdateProfile() {
                                                     name="description" 
                                                     type="textarea" 
                                                     placeholder="Describe Yourself"
-                                                    defaultValue={profileInfo[0].description}>
+                                                    defaultValue={userDesc}>
 
                                                     </Form.Control>
                                                 </Row>
@@ -209,7 +214,7 @@ export default function UpdateProfile() {
                 </Row>
             </Container>
             <div className="w-100 text-center mt-2">
-                <Link to="/">Cancel</Link>
+                <Link to="/dashboard">Cancel</Link>
             </div>
         </div>
     )

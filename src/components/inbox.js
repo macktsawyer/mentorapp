@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { Card, Col, Row, Navbar, Nav, Button, InputGroup, FormControl } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
 import { useAuth } from '../contexts/AuthContext';
 import { db } from '../firebase';
 import DisplayedMessages from './DisplayedMessages';
@@ -66,7 +67,14 @@ function Inbox() {
         <div>
             <Navbar fixed="top" variant="pills" className="me-2 justify-content-end">
                 <Nav.Item className="ms-2 me-2 mb-2">
-                    <Button href="/front-page-logged" variant="outline-info" to="/front-page">Home</Button>
+                <LinkContainer to="/front-page-logged">
+                    <Button variant="outline-info">Home</Button>
+                </LinkContainer>
+                </Nav.Item>
+                <Nav.Item className="ms-2 me-2 mb-2">
+                <LinkContainer to="/dashboard">
+                    <Button variant="outline-info">Dashboard</Button>
+                </LinkContainer>
                 </Nav.Item>
             </Navbar>
             <h3 className="text-center">Inbox</h3>
