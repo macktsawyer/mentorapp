@@ -43,7 +43,7 @@ export default function Signup() {
                 }
             })
             console.log('Document created!')
-            history.push('/')
+            history.push('/dashboard')
         } catch {
             console.log(error)
             setError('Failed to create an account')
