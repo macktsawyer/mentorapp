@@ -26,8 +26,8 @@ export default function FrontPage() {
                 </Container>
             </Navbar>
             <Container>
-                <Card className="text-center mb-4">
-                    <Card.Body className="mb-1">
+                <Card className="d-flex text-center mb-4 justify-content-center align-items-center">
+                    <Card.Body className="mb-1 w-75">
                         Learning to program is difficult. You don't have to do it alone. Often we may seek help only to be told to find our answers on Google. While it is true that we need to develop the skills to problem solve, some answers cannot be found on StackOverflow alone. Sometimes we need a guiding and helping hand.
                     </Card.Body>
                 </Card>
@@ -42,14 +42,16 @@ export default function FrontPage() {
                             <Card.Img variant="top" src="https://images.pexels.com/photos/2173508/pexels-photo-2173508.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></Card.Img>
                             <Card.Body className="text-center">
                             Students not only have the opportunity to broaden their knowledge but the student will objectively be able to quantify some of their learning experience through their lessons and student rating. 
-                            <LinkContainer to="/signup">
-                            <Button className="w-100 text-center mt-2">Get Started</Button>                            
-                            </LinkContainer>
                             </Card.Body>
                         </Card>
                     </Col>
                 </Row>
             </Container>
+            <div className="text-center justify-content-center align-items-center">
+            <LinkContainer to="/signup"> 
+                <Button href="/Signup" className="w-50 text-center mt-2">Get Started</Button>
+            </LinkContainer>
+            </div>
         </div>
     )
 }
