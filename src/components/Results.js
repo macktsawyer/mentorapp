@@ -59,8 +59,12 @@ function Results() {
                                     <Card className="text-center w-25">
                                         <div className="align-content-center justify-content-center"><img key={`${i.displayname}'s photo`} alt="display" style={{width: "50px", height: "50px"}} src={i.userphoto}></img></div>
                                         <h5 key={i.displayname}> {i.displayname} </h5>
-                                        <li key={`${i.languages}`} style ={{listStyle:'none'}}>{i.languages}</li>
-                                        <p key={`${i.displayname}'s description`}>{i.description}</p>
+                                        <p className="mt-2 mb-0">Looking to learn:</p>
+                                        <li key={`${i.languages}`} style ={{listStyle:'none'}}>{i.languages.map((e) => {
+                                            return (<li style={{listStyle:'none'}}><strong>{e}</strong></li>)
+                                        })}</li>
+                                        <p className="mt-2 mb-0">About this member:</p>
+                                        <p key={`${i.displayname}'s description`}><strong>{i.description}</strong></p>
                                     </Card>
                                     )
                                 }) }
