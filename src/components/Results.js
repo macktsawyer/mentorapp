@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Nav, Navbar, Container } from 'react-bootstrap';
+import { Button, Card, Nav, Navbar, Container, Row } from 'react-bootstrap';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { useLocation } from 'react-router-dom';
@@ -52,17 +52,19 @@ function Results() {
                 </Container>
             </Navbar>
             <Card>
-                { searchCrit } 
+                { searchCrit }
+                <Row> 
                 { loading ? "Loading..." : searchResults.map((i) => { //Conditionally rendering and listing of profile info
                                     return (
-                                    <Card className="w-25">
-                                        <img key={`${i.displayname}'s photo`} alt="display" style={{width: "50px", height: "50px"}} src={i.userphoto}></img>
+                                    <Card className="text-center w-25">
+                                        <div className="align-content-center justify-content-center"><img key={`${i.displayname}'s photo`} alt="display" style={{width: "50px", height: "50px"}} src={i.userphoto}></img></div>
                                         <h5 key={i.displayname}> {i.displayname} </h5>
                                         <li key={`${i.languages}`} style ={{listStyle:'none'}}>{i.languages}</li>
                                         <p key={`${i.displayname}'s description`}>{i.description}</p>
                                     </Card>
                                     )
                                 }) }
+                </Row>
             </Card>
         </div>
     )
