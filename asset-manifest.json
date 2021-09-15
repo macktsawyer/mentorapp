@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/mentorapp/static/css/main.f7f4c92c.chunk.css",
-    "main.js": "/mentorapp/static/js/main.517e2062.chunk.js",
-    "main.js.map": "/mentorapp/static/js/main.517e2062.chunk.js.map",
+    "main.js": "/mentorapp/static/js/main.ec0b7245.chunk.js",
+    "main.js.map": "/mentorapp/static/js/main.ec0b7245.chunk.js.map",
     "runtime-main.js": "/mentorapp/static/js/runtime-main.80f3bc2b.js",
     "runtime-main.js.map": "/mentorapp/static/js/runtime-main.80f3bc2b.js.map",
     "static/css/2.f2512455.chunk.css": "/mentorapp/static/css/2.f2512455.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.f2512455.chunk.css",
     "static/js/2.765553c7.chunk.js",
     "static/css/main.f7f4c92c.chunk.css",
-    "static/js/main.517e2062.chunk.js"
+    "static/js/main.ec0b7245.chunk.js"
   ]
 }
